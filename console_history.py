@@ -143,69 +143,6 @@ else :
         
 
 
-class InvalidInputYearRange(Exception):
-    """Invalid input year range"""
-    def __init__(self):
-        self.message = "Endind year is lesser than starting year"
-        super().__init__(self.message)
-#catch abcd as str and desimal as hw , invalid input 
-class NegativeYear(Exception):
-    """Negative year provided"""
-    def __init__(self):
-        self.message = "Year input is negative"
-        super().__init__(self.message)
-
-class AttackException(Exception):
-    """Attack Attack Attack !!!"""
-    def __init__(self):
-        self.message = "Terminating as this seems to be a resource wasting attack"
-        super().__init__(self.message)
-
-
-def isLeapYear(year : int) -> bool: 
-    return True if year % 4 == 0  else False
-
-
-def takeInput():
-    valid_inputs_recieved = False
-    attack = False
-    while (not valid_inputs_recieved and not attack) :
-        try:
-            starting_yr=int(input('starting from:'))
-            ending_yr=int(input('ending at:'))
-            if starting_yr < 0 or ending_yr < 0:
-                raise NegativeYear()
-            if starting_yr > ending_yr :
-                raise InvalidInputYearRange()
-            valid_inputs_recieved = True
-        except Exception as e:
-            if (isinstance(e, NegativeYear)):
-                print ("This in an attack")
-                attack = True
-                raise AttackException()
-            else:
-                print (e.message)    
-                print("Please try again")    
-        
-    return starting_yr, ending_yr
-
-def countLeapYears(starting_yr, ending_yr) -> int:
-    count = 0
-    for i in range(starting_yr, ending_yr):
-        if (isLeapYear( i)):
-            count+=1
-    return count
-
-def main():
-    try:
-        starting_yr, ending_yr = takeInput()
-        count = countLeapYears(starting_yr, ending_yr)
-        print("No. of leap years between " , starting_yr, " and ", ending_yr, " is: ", count)  
-    except Exception as e:
-        print ("Execution failed with exception: ", e)
-
-main()
-
 #bisection method for cube root
 # assuming for all +ve cubes , error w/in epsilon
 
@@ -219,14 +156,14 @@ guess = (high + low ) / 2.0
 
 
 #while high - low > epsilon :
-while abs(guess ** 3 - cube )> epsilon :
+while abs(guess ** 2 - cube )> epsilon :
     ct+=1
 
     print(ct)
-    if guess ** 3 > cube :
+    if guess ** 2 > cube :
         high = guess
         print(f"higher now : guess is {guess}")
-    elif guess **3  < cube :
+    elif guess **2  < cube :
         low = guess
         print(f"lower now : guess is {guess}")
     
@@ -255,4 +192,233 @@ while guess != N :
     guess = (high + low )/2
 
 print(f"so comp has guessed {count } times , the guessed ans will be {guess}")
+
+#use fx for testing if a int is tiangular int (ie if its a number thats add of sum of continues int , eg 1+2+3..+k)
+def is_triangular(n):
+    """ n is an int > 0 
+        Returns True if n is triangular, i.e. equals a continued
+        summation of natural numbers (1+2+3+...+k) 
+    """
+    total = 0
+    for i in range(n+1):
+        total += i
+        if total == n:
+            return True
+    return False
+print(is_triangular(6))
+
+
+    #  "'"
+    #  n is an int > 2
+    #      epsilon is a positive number < 1
+    #  Returns how many integers have a square root within epsilon of n 
+
+# def is_squareroot (n, epsilon) :
+#     low = 0
+#     high = n
+#     ct=0
+#     guess = (high + low ) / 2.0
+
+
+#     while abs(guess ** 2 - n )> epsilon :
+#         ct += 1
+
+#         if guess ** 2 > n :
+#             high = guess
+#         elif guess ** 2  < n :
+#             low = guess
+#         guess = (high + low ) / 2.0
+#     return(guess)
+
+#fx for finding sqrt using bisection mthd. v
+def bisection_root(x):
+    epsilon = 0.01
+    low = 0
+    high = x
+    ans = (high + low) /2.0
+    while abs(ans**2 - x) >= epsilon:
+        if ans**2 < x:
+            low = ans
+        else:
+            high = ans
+        ans = (high + low) /2.0
+    return ans 
+
+def count_nums_with_sqrt_close_to (n  , epsilon) :
+    count = 0
+    sqrt=bisection_root()
+    for i in range (n**3):
+        if abs(n-sqrt)< epsilon:
+            count+=1
+    return count 
+
+
+print(count_nums_with_sqrt_close_to(10),0.1)
+
+def func_a():
+    print (' inside func_a')
+def func_b (y) :
+    print ('inside func_b')
+    return y
+def func_c (f, z) :
+    print ('inside func_c')
+    return f (z)
+print (func_a())
+print (5 + func_b (2))
+print (func_c (func_b, 3))
+# * criteria is a func that takes in a number and returns a bool
+# * n is an int
+
+
+# Returns how many ints from 0 to n (inclusive) match
+# the criteria (i.e. return True when run with criteria)
+
+def is_even(x):
+    return x%2 == 0
+
+def apply (criteria, n) :
+    count = 0
+
+    for i in range (n + 1):
+        if criteria(i):# == True :
+            count += 1
+    return count
+
+
+how_many=apply(is_even,10)
+print(how_many)
+
+
+def char_counts (s) :
+
+# s is a string of lowercase chars
+
+# Return a tuple where the first element is the
+
+# number of vowels in s and the second element
+
+# is the number of consonants in s 
+    vowels=('a','e','i','o','u')
+    con_ct=0
+    vw_ct=0
+
+    for i in s :
+        if i not in vowels :
+            con_ct+=1
+        if i in vowels :
+            vw_ct+=1
+    return (vw_ct,con_ct)
+print(char_counts('anab'))
+
+def sum_and_prod (L) :
+# Lis a list of numbers
+# Return a tuple where the first value is the sum of all
+# elements in L and the second value is the product of 
+# all elements in L
+ sum=0
+ prod=1
+ for i in L:
+    sum+= i
+ for i in L:
+   prod *= i 
+ return(sum,prod)
+print(sum_and_prod([1,2,3,4,5]))
+
+def make_ordered_ap_list (n) :
+
+# n is a positive int
+# Returns a ap_list containing all ints in order from 0 to n (inclusive)
+ ap_list=[]
+ for i in range(n+1):
+  
+  ap_list.append(i)
+ return ap_list 
+print(make_ordered_ap_list(10))
+
+
+def remove_elem (L, e) :
+# L is a list
+# Returns a new list with elements in the same order as L
+# but without any elements equal to e.
+ new_L=[]
+ for i in range(len(L)) :
+    if L[i]!= e:
+        new_L.append(L[i])
+ return new_L
+
+
+L = [1,2,2,2]
+print (remove_elem (L, 2) ) # prints [1]
+
+def count_words (sen) :
+#  sen is a string representing a sentence
+# Returns how many words are in a ( i.e. a word is a 
+# sequence of characters between spaces.
+#b how many words r there , seperated by space
+ ct = 0 
+ lsen=sen.split(' ')
+
+ print(lsen)
+ for i in lsen:
+    ct+=1
+ return ct
+print(count_words ("Hello it's me") )
+
+
+
+def sort_words (sen) :
+    ''' sen is a string representing a sentence
+    Returns a list containing all the words in sen 
+    but sorted in alphabetical order. '''
+    spsen=sen.split(' ')
+    spsen.sort()
+    return spsen
+ 
+print (sort_words ("look at this photograph") )
+
+# This one is similar to remove_elem from lec10 except that remove_elem 
+# returns a new list and this one mutates the parameter L (and returns None)
+def remove_all(L, e):
+    """ 
+    L is a list
+    Mutates L to remove all elements in L that are equal to e
+    Returns None.
+    """
+    # your code here
+    Lnew=L[:]
+    L.clear()
+
+    for i in range(len(Lnew)):
+       if e != Lnew[i] :
+           L.append(Lnew[i])
+    
+
+
+
+L=[1,1,2,2,3,3,3,44]
+print(remove_all (L,2))
+print(L)
+
+# This one is similar to remove_elem from lec10 except that remove_elem 
+# returns a new list and this one mutates the parameter L (and returns None)
+def remove_all(L, e):
+    """ 
+    L is a list
+    Mutates L to remove all elements in L that are equal to e
+    Returns None.
+    """
+    # your code here
+    Lnew=L[:]
+
+    for i in range(len(Lnew)) :
+        if e == Lnew[i] :
+            L.remove(e)
+                
+
+
+
+L=[1,1,2,2,3,3,3,44]
+print(remove_all (L,2))
+print(L)
+
 
