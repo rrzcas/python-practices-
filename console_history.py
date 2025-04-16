@@ -421,4 +421,77 @@ L=[1,1,2,2,3,3,3,44]
 print(remove_all (L,2))
 print(L)
 
+## Write a list comprehension expression that uses a list named L.
+# It makes a new list whose elements are the middle 
+# character of strings whose length is 3. 
+
+# If L = ['abc', 'm', 'p', 'xyz', '123', 57]
+# It makes ['b', 'y', '2']
+
+# method using function
+
+def newlist_of3rd_sym(L):
+    newL=[]
+    for i in L :
+        if type(i) == str  and  len(i)== 3 :
+            newL.append(i[1])
+    return newL 
+L = ['abc', 'm', 'p', 'xyz', '123', 57]
+# print(newlist_of3rd_sym(L))
+
+# one-liner method
+newL=[ i[1] for i in L if type(i) == str  and  len(i)== 3]
+print(newL)
+# print([e[1] for e in L if len(e)==3 and type(e)==str])
+###################################
+
+def pairwise_div(Lnum, Ldenom):
+    """ Lnum and Ldenom are non-empty lists of 
+        equal lengths containing numbers
+
+    Returns a new list whose elements are the pairwise 
+    division of an element in Lnum by an element in Ldenom. 
+
+    Raise a ValueError if Ldenom contains 0. """
+    # your code here
+    # challenge: write this with list comprehension! - e**2 for e in L if e%2 != 0
+    # newL=[ i[1] for i in L if type(i) == str  and  len(i)== 3]
+
+    # assert len(Lnum)!=0 and len(Ldenom)!=0 and len(Lnum) ==len(Ldenom) 
+    assert len(Lnum)!=0 and len(Ldenom)!=0 , ' list is empty^o^'
+    assert len(Lnum) ==len(Ldenom)  , 'lengths of lists given are different '
+
+    try :
+            ret_L= [ Lnum[i] / Ldenom[i] for i in range(len(Lnum))  ]
+    except  ZeroDivisionError:
+       print('zero dv error')
+       raise ZeroDivisionError  ('cant divide by Zero^^')
+      
+
+
+    
+# # For example:
+# L1 = [4,5,6]
+# L2 = [1,2,3]    
+# print(pairwise_div(L1, L2))  # prints [4.0,2.5,2.0]
+
+# L1 = [4,5,6]
+# L2 = [1,0,3]    
+# print(pairwise_div(L1, L2))  # raises a ValueError
+
+# to run after introducing assertions
+# L1 = [4,5,6,7,8]
+# L2 = [1,8,3]    
+# print(pairwise_div(L1, L2))  # raises an AssertionError
+
+L1 = []
+L2 = []    
+print(pairwise_div(L1, L2))  # raises an AssertionError
+
+
+
+
+
+
+
 
