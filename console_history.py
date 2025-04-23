@@ -453,7 +453,7 @@ def pairwise_div(Lnum, Ldenom):
     division of an element in Lnum by an element in Ldenom. 
 
     Raise a ValueError if Ldenom contains 0. """
-    # your code here
+    # your code her
     # challenge: write this with list comprehension! - e**2 for e in L if e%2 != 0
     # newL=[ i[1] for i in L if type(i) == str  and  len(i)== 3]
 
@@ -487,6 +487,153 @@ def pairwise_div(Lnum, Ldenom):
 L1 = []
 L2 = []    
 print(pairwise_div(L1, L2))  # raises an AssertionError
+
+def sum_str_lengths(L):
+    """
+    L is a non-empty list containing either: 
+    * string elements or 
+    * a non-empty sublist of string elements
+    Returns the sum of the length of all strings in L and 
+    lengths of strings in the sublists of L. If L contains an 
+    element that is not a string or a list, or L's sublists 
+    contain an element that is not a string, raise a ValueError.
+    """
+    # Your code here  
+    for i in range(len(L)) :
+        assert type( L[i]) == str or type(L[i]) == list , 'errror,1'
+        for j in range(len(L[i]([j]))):
+            assert type (L[i][j]) == str ,'error,2'
+   
+        sumof_listL_str =[len(L[i]) for i in range(len(L)) + len(L[i][j]) for j in range(len(i)) ]
+
+    # newL=[ i[1] for i in L if type(i) == str  and  len(i)== 3]
+
+    return sumof_listL_str
+    
+
+# Examples:
+print(sum_str_lengths(["abcd", ["e", "fg"]]))  # prints 7
+# print(sum_str_lengths([12, ["e", "fg"]]))      # raises ValueError
+# print(sum_str_lengths(["abcd", [3, "fg"]]))    # raises ValueError
+
+def find_grades(idict, inputted_name):
+    """ grades is a dict mapping student names (str) to grades (str)
+        students is a list of student names 
+    Returns a list containing the grades for students (in the same order) """
+    # your code here
+    newlist=[]
+    for i in inputted_name :
+        newlist.append(idict[i])
+    return newlist
+d = {'Ana':'B', 'Matt':'C', 'John':'B', 'Katy':'A'}
+print(find_grades(d, ['Matt', 'Katy'])) # returns ['C', 'A']””
+
+
+#utry lec 14 - dictionaries
+
+def find_in_L(Ld, k):
+    """ L is a list of dicts
+        k is an int
+    Returns True if k is a key in any dicts of L and False otherwise """
+    # your code here
+    RES=False
+    
+    for sfdict in Ld :
+        if k in sfdict:
+            RES= True
+    
+    return RES
+
+
+
+
+  
+d1 = {1:2, 3:4, 5:6}
+d2 = {2:4, 4:6}
+d3 = {1:1, 3:9, 4:16, 5:25}
+
+print(find_in_L([d1, d2, d3], 2))  # returns True
+print(find_in_L([d1, d2, d3], 25))  # returns False
+
+########################################################
+
+def count_matches(d):
+    """ d is a dict
+    Returns how many entries in d have the key equal to its value """
+    # your code here
+    ct=0
+    for k, v in d.items():
+        if k == v :
+            ct+=1
+    return ct
+
+
+d = {1:2, 3:4, 5:6}
+print(count_matches(d))   # prints 0
+
+d = {1:2, 'a':'a', 5:5}
+print(count_matches(d))   # prints 2
+
+my_d = {
+    'Ana': {'mq': [10], 'ps': [10, 10]},
+    'Bob': {'ps': [7, 8], 'mq': [8]},
+    'Eric': {'mq': [3], 'ps': [0]}
+}
+def get_average (data, what) :
+    all_data = []
+    for stud in data.keys () :
+    # INSERT LINE HERE\
+    # CHOICE A:
+        all_data = all_data + data[stud][what]
+        
+        # returns a list of int 
+    # CHOICE B:
+        # all_data.append(data [stud][what])
+        # print('adlist',all_data)
+
+        #returns int inside a list of list ,as all data is a list
+    print('stud',stud)
+    print('adlist',all_data)
+
+    print(get_average(my_d,'mq'))
+    return sum (all_data) /len (all_data)
+
+
+def power_while2(n, p):
+    ans=1
+    flag=False
+    if p < 0:
+        flag=True
+        p=abs(p)
+    
+    if p == 0:
+        return 1
+
+    while p > 0 :
+        ans=ans*n
+        p-=1
+    if flag:
+        ans= 1/(ans)
+    return ans
+
+
+print(power_while2(-8,-3))
+
+
+# utry_lec15_recursion
+# Calculate n**p recursively by writing this function
+
+def power_recur1(n, p):
+    if p==0 :
+        return 1
+    elif p==1 :
+        return n
+    else:
+        return power_recur1(n,p-1)*n
+
+print(power_recur1(2,3))  # prints 8
+
+
 
 
 
