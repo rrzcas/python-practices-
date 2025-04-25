@@ -634,6 +634,84 @@ def power_recur1(n, p):
 print(power_recur1(2,3))  # prints 8
 
 
+def score_count(x):
+    """ Returns all the ways to make a score 
+    of x by adding 1, 2, and/or 3 together. 
+    Order doesn't matter. """
+    if x == 1:
+        return 1  # 1+0
+    elif x == 2:
+        return 2  # 2+0 or 1+1
+    elif x == 3:
+        return 3  # 3+0 or 2+1 or 1+1+1
+    else:
+        # make a score of x-1 then add 1
+        # and make a score of x-2 then add 2
+        # and make a score of x-3 then add 3
+        return score_count(x-1)+score_count(x-2)+score_count(x-3)
+    
+print(score_count(4))  # prints 6
+# print(score_count(6))  # prints 20
+# print(score_count(13))  # prints 1431
+############### YOU TRY IT ###############
+
+
+# Modify the code we wrote to return the total length 
+# of all strings inside L:   
+    
+def total_len_recur(L):
+    if len(L) == 1:
+        return len(L[0])
+    else:
+        return len(L[0]) + total_len_recur(L[1:])
+
+test = ["ab", "c", "defgh"]
+print(total_len_recur(test))  # should print 8
+
+#lec 16 - utry
+
+def fib_recur(n):
+    if n == 1 or n == 2:
+        return 1
+    else:
+        return fib_recur(n-1)+fib_recur(n-2)
+
+print(fib_recur(6))
+
+
+# -1st utry:
+def total_recur (L) :
+    if len(L)==0:
+        return 0
+    else:
+        return L[0]+total_recur (L[1:])
+test = [30, 40, 50]
+print (total_recur (test) )
+# utry:searching e in sublist of list 
+def in_lists_of_list(L, e):
+    """
+    L is a list whose elements are lists containing ints
+    Returns True if e is an element within the lists of L
+    and False otherwise. 
+    Hint, the in operator is useful here, i.e. e in something
+    """
+    # your code here
+    if len(L)== 0 :
+        return False
+    elif e in L[0]:
+        return True
+    else:
+        return in_lists_of_list(L[1:],e)
+
+    
+
+test = [[1,2], [3,4], [5,6,7]]
+print(in_lists_of_list(test, 3))  # prints True
+
+test = [[1,2], [3,4], [5,6,7]]
+print(in_lists_of_list(test, 0))  # prints False
+
+
 
 
 
