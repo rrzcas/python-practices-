@@ -40,5 +40,47 @@ test = [[1,2],3,4,5,6,7]
 # print(in_list_of_lists_mod(test, 10))  # prints False
 
 
+# Q3. 
+def my_deepcopy(L):
+    """ 
+    L is a list, containing lists or list of lists, etc.
+    Returns a new list with the same structure as L that 
+    contains copies (recursively) of every sublist 
+    """
+    # your code here
+    if L==[]:
+        return []
+    if len(L)==1:
+        if type(L[0])==list:
+            return [my_deepcopy(L[0])]
+        else:
+            return [L[0]]
+    else:
+        if type(L[0])==list:
+            return [my_deepcopy(L[0])]+my_deepcopy(L[1:])
+        else:
+            return [L[0]]+my_deepcopy(L[1:])
+
+
+myL = ["abc", ['d'], ['e', ['f', 'g']]]
+my_newL = my_deepcopy(myL)
+print(myL)
+print(my_newL)
+myL[2][1][0] = 1
+print(myL)      # should be ['abc', ['d'], ['e', [1, 'g']]]
+print(my_newL)  # should be ['abc', ['d'], ['e', ['f', 'g']]]
+
+    # if L==[]:
+    #     return []
+    # if len(L)==1:
+    #     if type(L[0])== list :
+    #         return [L[0]] or my_deepcopy(L[1:])
+    #     else:
+    #         return L[0]
+    # else:
+    #     if type(L[0])==list :
+    #         return L[0]
+    #     else:
+    #         return [my_deepcopy(L[0])]+[my_deepcopy(L[1:])]
 
 
